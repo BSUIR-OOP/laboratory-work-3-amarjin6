@@ -10,7 +10,7 @@ class BaseSprite(pygame.sprite.Sprite):
         self._who = 'BaseSprite'
 
     # function to get value of _age
-    def get_age(self):
+    def get_age(self) -> str:
         return self._age
 
     # function to set value of _age
@@ -22,7 +22,7 @@ class BaseSprite(pygame.sprite.Sprite):
         del self._age
 
     # function to get value of _name
-    def get_name(self):
+    def get_name(self) -> str:
         return self._name
 
     # function to set value of _name
@@ -38,7 +38,7 @@ class BaseSprite(pygame.sprite.Sprite):
         return self._who
 
     # function to get value of _salary
-    def get_salary(self):
+    def get_salary(self) -> str:
         return self._salary
 
     # function to set value of _salary
@@ -96,6 +96,9 @@ class TertiaryCharacter(Deuteragonist):
 
 if __name__ == '__main__':
     lst = []
+    objects = {1: BaseSprite(), 2: Character(), 3: Actor(),
+               4: Protagonist(), 5: Antagonist(), 6: Deuteragonist(),
+               7: TertiaryCharacter()}
     print('[1] - Add [2] - Load [3] - Delete [4] - Edit [5] - Save [6] - Exit')
     x = int(input())
     while x != 6:
@@ -103,34 +106,9 @@ if __name__ == '__main__':
             print(
                 '[1] - BaseSprite [2] - Character [3] - Actor [4] - Protagonist [5] - Antagonist [6] - Deuteragonist [7] - TertiaryCharacter')
             per = int(input())
-
-            if per == 1:
-                person = BaseSprite()
-                lst.append(person)
-
-            elif per == 2:
-                person = Character()
-                lst.append(person)
-
-            elif per == 3:
-                person = Actor()
-                lst.append(person)
-
-            elif per == 4:
-                person = Protagonist()
-                lst.append(person)
-
-            elif per == 5:
-                person = Antagonist()
-                lst.append(person)
-
-            elif per == 6:
-                person = Deuteragonist()
-                lst.append(person)
-
-            elif per == 7:
-                person = TertiaryCharacter()
-                lst.append(person)
+            for item in objects:
+                if item == per:
+                    lst.append(objects[item])
 
         elif x == 2:
             with open('tmp.txt', 'r') as f:
@@ -168,8 +146,19 @@ if __name__ == '__main__':
             elif x == 5:
                 with open('tmp.txt', 'w') as f:
                     for obj in lst:
-                        f.writelines(obj.who, obj.name, obj.age, obj.salary)
+                        f.writelines(str(obj.who) + '\n')
+                        f.writelines(str(obj.name) + '\n')
+                        f.writelines(str(obj.age) + '\n')
+                        f.writelines(str(obj.salary) + '\n')
 
         print('[1] - Add [2] - Load [3] - Delete [4] - Edit [5] - Save [6] - Exit')
         print(lst)
         x = int(input())
+
+    with open('tmp.txt', 'w') as f:
+        for obj in lst:
+            f.writelines(str(obj.who) + '\n')
+            f.writelines(str(obj.name) + '\n')
+            f.writelines(str(obj.age) + '\n')
+            f.writelines(str(obj.salary) + '\n')
+    exit(0)
