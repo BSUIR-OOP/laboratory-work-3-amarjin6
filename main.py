@@ -27,7 +27,22 @@ def deserialize():
         s = str(cls)
         for item in objects:
             if item in s:
-                lst.append(objects[item])
+                ss = s[1:]
+                pos1 = ss.find('{')
+                ss = ss[pos1:]
+                ss = ss.replace('\'', '')
+                ss = ss.replace('{', '')
+                ss = ss.replace('}', '')
+                convertedDict = dict((x.strip(), y.strip())
+                                     for x, y in (element.split(':')
+                                                  for element in ss.split(', ')))
+
+                objects[item].salary = convertedDict['_salary']
+                objects[item].name = convertedDict['_name']
+                objects[item].age = convertedDict['_age']
+
+            lst.append(objects[item])
+
     return lst
 
 
