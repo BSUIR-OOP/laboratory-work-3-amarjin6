@@ -6,11 +6,12 @@ def serialize(lst: list):
         for obj in lst:
             character = vars(obj)
             cls = character.get('_who')
-            f.writelines('{' + '\'' + str(cls) + '\'' + ' : ' + str(character) + '}' + '\n')
+            f.writelines('{' + '\'' + str(cls) + '\'' + ': ' + str(character) + '}' + '\n')
 
 
 def deserialize():
-    ...
+    lst = []
+    return lst
 
 
 if __name__ == '__main__':
@@ -30,8 +31,7 @@ if __name__ == '__main__':
                     lst.append(objects[item])
 
         elif x == 2:
-            with open('tmp.txt', 'r') as f:
-                print(f.read().splitlines())
+            lst = deserialize()
 
         elif x == 3:
             print('Enter object number:')
@@ -63,12 +63,7 @@ if __name__ == '__main__':
                     lst[obj].salary = salary
 
             elif x == 5:
-                with open('tmp.txt', 'w') as f:
-                    for obj in lst:
-                        f.writelines(str(obj.who) + '\n')
-                        f.writelines(str(obj.name) + '\n')
-                        f.writelines(str(obj.age) + '\n')
-                        f.writelines(str(obj.salary) + '\n')
+                serialize(lst)
 
         print('[1] - Add [2] - Load [3] - Delete [4] - Edit [5] - Save [6] - Exit')
         print(lst)
