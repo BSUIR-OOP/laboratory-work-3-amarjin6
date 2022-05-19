@@ -11,6 +11,23 @@ def serialize(lst: list):
 
 def deserialize():
     lst = []
+
+    with open('tmp.txt', 'r') as f:
+        Lines = f.readlines()
+
+    classes = []
+    for line in Lines:
+        classes.append(line.strip())
+
+    objects = {'BaseSprite': BaseSprite(), 'Character': Character(), 'Actor': Actor(),
+               'Protagonist': Protagonist(), 'Antagonist': Antagonist(), 'Deuteragonist': Deuteragonist(),
+               'TertiaryCharacter': TertiaryCharacter()}
+
+    for cls in classes:
+        s = str(cls)
+        for item in objects:
+            if item in s:
+                lst.append(objects[item])
     return lst
 
 
