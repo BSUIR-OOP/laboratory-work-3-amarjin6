@@ -1,0 +1,1 @@
+{'Character' : {'_salary': None, '_name': None, '_age': None, '_who': 'Character'}}
